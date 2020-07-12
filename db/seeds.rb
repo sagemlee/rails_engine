@@ -51,14 +51,16 @@ require 'csv'
 csv_text_items = File.read(Rails.root.join('app','data', 'items.csv'))
 csv_items = CSV.parse(csv_text_items, :headers => true)
 csv_items.each do |row|
-  t = Items.new
-  t.first_name = row['first_name']
-  t.last_name = row['last_name']
+  t = Item.new
+  t.name = row['name']
+  t.merchant_id = row['merchant_id']
+  t.description = row['description']
+  t.unit_price= row['unit_price']
   t.created_at = row['created_at']
   t.updated_at = row['updated_at']
   t.save
 end
-puts "There are now #{Items.count} rows in the customers table"
+puts "There are now #{Item.count} rows in the Items table"
 
 # csv_text = File.read(Rails.root.join('app','data', 'merchants.csv'))
 # csv = CSV.parse(csv_text, :headers => true)
