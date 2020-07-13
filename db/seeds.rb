@@ -48,31 +48,30 @@ require 'csv'
 # end
 # puts "There are now #{Invoice.count} rows in the Invoices table"
 
-csv_text_items = File.read(Rails.root.join('app','data', 'items.csv'))
-csv_items = CSV.parse(csv_text_items, :headers => true)
-csv_items.each do |row|
-  t = Item.new
-  t.name = row['name']
-  t.merchant_id = row['merchant_id']
-  t.description = row['description']
-  t.unit_price= row['unit_price']
-  t.created_at = row['created_at']
-  t.updated_at = row['updated_at']
-  t.save
-end
-puts "There are now #{Item.count} rows in the Items table"
-
-# csv_text = File.read(Rails.root.join('app','data', 'merchants.csv'))
-# csv = CSV.parse(csv_text, :headers => true)
-# csv.each do |row|
-#   t = Merchant.new
-#   t.first_name = row['first_name']
-#   t.last_name = row['last_name']
+# csv_text_items = File.read(Rails.root.join('app','data', 'items.csv'))
+# csv_items = CSV.parse(csv_text_items, :headers => true)
+# csv_items.each do |row|
+#   t = Item.new
+#   t.name = row['name']
+#   t.merchant_id = row['merchant_id']
+#   t.description = row['description']
+#   t.unit_price= row['unit_price']
 #   t.created_at = row['created_at']
 #   t.updated_at = row['updated_at']
 #   t.save
 # end
-# puts "There are now #{Merchant.count} rows in the customers table"
+# puts "There are now #{Item.count} rows in the Items table"
+
+csv_text_merchant = File.read(Rails.root.join('app','data', 'merchants.csv'))
+csv_merchant = CSV.parse(csv_text_merchant, :headers => true)
+csv_merchant.each do |row|
+  t = Merchant.new
+  t.name = row['name']
+  t.created_at = row['created_at']
+  t.updated_at = row['updated_at']
+  t.save
+end
+puts "There are now #{Merchant.count} rows in the merchants table"
 
 # csv_text = File.read(Rails.root.join('app','data', 'transactions.csv'))
 # csv = CSV.parse(csv_text, :headers => true)
