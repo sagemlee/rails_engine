@@ -62,25 +62,27 @@ require 'csv'
 # end
 # puts "There are now #{Item.count} rows in the Items table"
 
-csv_text_merchant = File.read(Rails.root.join('app','data', 'merchants.csv'))
-csv_merchant = CSV.parse(csv_text_merchant, :headers => true)
-csv_merchant.each do |row|
-  t = Merchant.new
-  t.name = row['name']
-  t.created_at = row['created_at']
-  t.updated_at = row['updated_at']
-  t.save
-end
-puts "There are now #{Merchant.count} rows in the merchants table"
-
-# csv_text = File.read(Rails.root.join('app','data', 'transactions.csv'))
-# csv = CSV.parse(csv_text, :headers => true)
-# csv.each do |row|
-#   t = Transaction.new
-#   t.first_name = row['first_name']
-#   t.last_name = row['last_name']
+# csv_text_merchant = File.read(Rails.root.join('app','data', 'merchants.csv'))
+# csv_merchant = CSV.parse(csv_text_merchant, :headers => true)
+# csv_merchant.each do |row|
+#   t = Merchant.new
+#   t.name = row['name']
 #   t.created_at = row['created_at']
 #   t.updated_at = row['updated_at']
 #   t.save
 # end
-# puts "There are now #{Transaction.count} rows in the customers table"
+# puts "There are now #{Merchant.count} rows in the merchants table"
+
+csv_text_transactions = File.read(Rails.root.join('app','data', 'transactions.csv'))
+csv_transactions = CSV.parse(csv_text_transactions, :headers => true)
+csv_transactions.each do |row|
+  t = Transaction.new
+  t.invoice_id = row['invoice_id']
+  t.credit_card_number = row['credit_card_number']
+  t.credit_card_expiration_date = row['credit_card_expiration_date']
+  t.result = row['result']
+  t.created_at = row['created_at']
+  t.updated_at = row['updated_at']
+  t.save
+end
+puts "There are now #{Transaction.count} rows in the transactions table"
