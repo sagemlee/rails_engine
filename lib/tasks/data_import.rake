@@ -1,5 +1,2 @@
 desc 'Data Importing'
-task :data_import do
-  rails db:seed 
-  rails db:seed
-end
+task :data_import => [:environment, 'db:reset']
