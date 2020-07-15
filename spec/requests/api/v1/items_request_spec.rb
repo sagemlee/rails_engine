@@ -14,23 +14,22 @@ describe "Items API" do
 
   end
 
-    it "can get one item by its id" do
+  it "can get one item by its id" do
     id = create(:item).id
 
     get "/api/v1/items/#{id}"
 
     item = JSON.parse(response.body)
-
     expect(response).to be_successful
     expect(item["id"]).to eq(id)
   end
 
   it "can create a new item" do
-    item_params = { name: "Saw", description: "I want to play a game" }
+    merchant = create(:merchant)
+    item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
 
     post "/api/v1/items", params: {item: item_params}
     item = Item.last
-
     expect(response).to be_successful
     expect(item.name).to eq(item_params[:name])
   end
