@@ -64,3 +64,8 @@ ActiveRecord::Schema.define(version: 2020_07_13_021219) do
   end
 
 end
+
+
+
+
+

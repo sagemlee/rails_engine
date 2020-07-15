@@ -88,3 +88,12 @@ csv_transactions.each do |row|
   t.save
 end
 puts "There are now #{Transaction.count} rows in the transactions table"
+
+ ActiveRecord::Base.connection.reset_pk_sequence!('customers')
+  ActiveRecord::Base.connection.reset_pk_sequence!('invoice_items')
+  ActiveRecord::Base.connection.reset_pk_sequence!('invoices')
+  ActiveRecord::Base.connection.reset_pk_sequence!('items')
+  ActiveRecord::Base.connection.reset_pk_sequence!('merchants')
+  ActiveRecord::Base.connection.reset_pk_sequence!('transactions')
+
+  puts "data importing complete"
