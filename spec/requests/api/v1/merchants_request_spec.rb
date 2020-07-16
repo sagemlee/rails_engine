@@ -26,6 +26,7 @@ describe "Merchants API" do
   it "can create a new merchant" do
     merchant_params = {name: "Walmart"}
     post "/api/v1/merchants", params: merchant_params
+
     merchant = Merchant.last
     expect(response).to be_successful
     expect(merchant.name).to eq(merchant_params[:name])
@@ -43,7 +44,19 @@ describe "Merchants API" do
 
     expect(response).to be_success
     expect{Merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
+  end
 
+  it "can update an existing merchant" do
+    id = create(:merchant).id
+    previous_name = Merchant.last.name
+    merchant_params = { name: "Harry's" }
+
+    put "/api/v1/merchants/#{id}", params:  merchant_params
+    merchant = Merchant.find_by(id: id)
+
+    expect(response).to be_successful
+    expect(merchant.name).to_not eq(previous_name)
+    expect(merchant.name).to eq("Harry's")
   end
 
 end

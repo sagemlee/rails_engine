@@ -42,9 +42,21 @@ describe "Items API" do
     expect(item.name).to eq(item_params[:name])
 
     delete "/api/v1/items/#{item.id}"
-
     expect(response).to be_success
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+
   end
 
+  it "can update an existing item" do
+    id = create(:item).id
+    previous_name = Item.last.name
+    item_params = { name: "Thingy" }
+
+    put "/api/v1/items/#{id}", params:  item_params
+    item = Item.find_by(id: id)
+
+    expect(response).to be_successful
+    expect(item.name).to_not eq(previous_name)
+    expect(item.name).to eq("Thingy")
+  end
 end
