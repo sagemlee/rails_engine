@@ -7,4 +7,10 @@ class Item < ApplicationRecord
   Item.joins(:merchant)
        .where('items.merchant_id =?', id)
  end 
+
+    def self.find_merchant(id)
+        Merchant.joins(:items)
+                .where('items.id=?', id)
+            
+    end 
 end
