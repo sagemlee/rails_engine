@@ -8,9 +8,8 @@ describe "Items API" do
 
     expect(response).to be_successful
 
-    items = JSON.parse(response.body)
-
-   expect(items.count).to eq(3)
+    items = JSON.parse(response.body, symbolize_names: true )
+   expect(items[:data].count).to eq(3)
 
   end
 
@@ -19,12 +18,21 @@ describe "Items API" do
 
     get "/api/v1/items/#{id}"
 
-    item = JSON.parse(response.body)
+    item = JSON.parse(response.body, symbolize_names: true )
     expect(response).to be_successful
-    expect(item["id"]).to eq(id)
+    expect(item[:data][:attributes][:id]).to eq(id)
   end
 
   it "can create a new item" do
+    merchant = create(:merchant)
+    item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
+    post "/api/v1/items", params: {item: item_params}
+    item = Item.last
+    expect(response).to be_successful
+    expect(item.name).to eq(item_params[:name])
+  end
+
+  it "can delete item" do
     merchant = create(:merchant)
     item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
 
@@ -32,6 +40,11 @@ describe "Items API" do
     item = Item.last
     expect(response).to be_successful
     expect(item.name).to eq(item_params[:name])
+
+    delete "/api/v1/items/#{item.id}"
+
+    expect(response).to be_success
+    expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
 end
