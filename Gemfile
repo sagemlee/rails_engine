@@ -51,3 +51,8 @@ gem 'fast_jsonapi'
 
 gem 'simplecov', require: false, group: :test
 
+group :test do
+  gem 'shoulda-matchers', '~> 4.0'
+end
+
+
