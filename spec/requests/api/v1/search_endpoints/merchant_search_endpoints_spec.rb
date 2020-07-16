@@ -7,15 +7,17 @@ describe "Merchants API" do
   merchant3 = create(:merchant, name: "Starbucks")
   merchant3 = create(:merchant, name: "King Soopers")
   
-  expect(response).to be_success
-
+  
   get "/api/v1/merchants/find_all?name=AR"
   
+  expect(response).to be_success
+
+  json = JSON.parse(response.body, symbolize_names: true)
   names = json[:data].map do |merchant|
     merchant[:attributes][:name]
   end
 
-  expect(names.sort).to eq(["Starbuck","Target","Walmart"])
+  expect(names.sort).to eq(["Starbucks","Target","Walmart"])
 
   end 
 end 

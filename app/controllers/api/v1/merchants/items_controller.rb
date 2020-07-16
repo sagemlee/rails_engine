@@ -4,4 +4,5 @@ class Api::V1::Merchants::ItemsController < ApplicationController
       render json: ItemSerializer.new(Item.by_merchant(params[:merchant_id]))
     end
 
+   
 end
