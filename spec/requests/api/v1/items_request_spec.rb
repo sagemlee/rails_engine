@@ -59,4 +59,25 @@ describe "Items API" do
     expect(item.name).to_not eq(previous_name)
     expect(item.name).to eq("Thingy")
   end
+
+    
+  it "can get merchant for an item" do 
+    merchant1 = create(:merchant)
+    merchant2 = create(:merchant)
+    item1 = create(:item, merchant_id: merchant1.id)
+    item2 = create(:item, merchant_id: merchant2.id)
+    item3 = create(:item, merchant_id: merchant2.id)
+   
+    get "/api/v1/items/#{item2.id}/merchant"
+
+    expect(response).to be_successful
+    merchant = JSON.parse(response.body, symbolize_names: true )
+    expected_id = "#{merchant2.id}"
+    merchant_id = merchant[:data][:id]
+    binding.pry
+    expect(merchant_id).to eq(expected_id)
+    #expect(merchant[:data][:id]).to eq(expected_id)
+      
+  end 
+
 end
