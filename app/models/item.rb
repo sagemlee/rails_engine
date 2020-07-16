@@ -13,4 +13,21 @@ class Item < ApplicationRecord
                 .where('items.id=?', id)
             
     end 
+
+
+    def self.names_search(input)
+        Item.all.find_all do |item| 
+            if item.name.downcase.include?("#{input[:name].downcase}") 
+                item
+            end 
+        end
+    end 
+
+    def self.name_search(input)
+        Item.all.find do |item| 
+            if item.name.downcase.include?("#{input[:name].downcase}") 
+                item
+            end 
+        end
+    end 
 end

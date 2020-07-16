@@ -49,3 +49,5 @@ gem 'pry'
 gem 'faker'
 gem 'fast_jsonapi'
 
+gem 'simplecov', require: false, group: :test
+
