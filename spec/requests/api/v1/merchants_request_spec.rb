@@ -68,13 +68,13 @@ describe "Merchants API" do
     get "/api/v1/merchants/#{merchant.id}/items"
 
     expect(response).to be_successful
-    merchants = JSON.parse(response.body, symbolize_names: true )
-    expect(merchants[:data].count).to eq(3)
+    items = JSON.parse(response.body, symbolize_names: true )
+
+    expect(items[:data].count).to eq(3)
     expected_ids = [item1.id, item2.id, item3.id]
-    item_ids = merchants[:data].map do |item|
+    item_ids = items[:data].map do |item|
         item[:id].to_i
     end
     expect(item_ids).to eq(expected_ids)
   end 
-
 end
