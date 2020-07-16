@@ -260,6 +260,60 @@
           null
         ]
       },
+      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
       "/Users/sagelee/turing/3module/projects/rails_engine/app/models/item.rb": {
         "lines": [
           1,
@@ -297,7 +351,66 @@
           null
         ]
       },
-      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/application_record.rb": {
+      "/Users/sagelee/turing/3module/projects/rails_engine/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/sagelee/turing/3module/projects/rails_engine/app/models/customer.rb": {
         "lines": [
           1,
           1,
@@ -305,6 +418,6 @@
         ]
       }
     },
-    "timestamp": 1594909128
+    "timestamp": 1594909466
   }
 }
