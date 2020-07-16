@@ -59,4 +59,22 @@ describe "Merchants API" do
     expect(merchant.name).to eq("Harry's")
   end
 
+  it "can return all items associated with a merchant" do 
+    merchant = create(:merchant)
+    item1 = create(:item, merchant_id: merchant.id)
+    item2 = create(:item, merchant_id: merchant.id)
+    item3 = create(:item, merchant_id: merchant.id)
+   
+    get "/api/v1/merchants/#{merchant.id}/items"
+
+    expect(response).to be_successful
+    merchants = JSON.parse(response.body, symbolize_names: true )
+    expect(merchants[:data].count).to eq(3)
+    expected_ids = [item1.id, item2.id, item3.id]
+    item_ids = merchants[:data].map do |item|
+        item[:id].to_i
+    end
+    expect(item_ids).to eq(expected_ids)
+  end 
+
 end
