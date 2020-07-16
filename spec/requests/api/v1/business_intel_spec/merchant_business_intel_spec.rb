@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Merchants API" do
-  xit "can get merchants with most revenue" do 
+  it "can get merchants with most revenue" do 
     merchant1 = create(:merchant)
     merchant2 = create(:merchant)
     merchant3 = create(:merchant)
@@ -19,9 +19,9 @@ describe "Merchants API" do
     invoice4 = Invoice.create(customer_id: customer1.id, merchant_id: merchant3, status: "shipped")
     
     invoice_item1 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice1.id, quantity: 1, unit_price: 10.00)
-    invoice_item2 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice2.id, quantity: 1, unit_price: 11.00)
-    invoice_item3 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice3.id, quantity: 1, unit_price: 12.00)
-    invoice_item4 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice4.id, quantity: 1, unit_price: 13.00)
+    invoice_item2 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice2.id, quantity: 2, unit_price: 11.00)
+    invoice_item3 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice3.id, quantity: 3, unit_price: 12.00)
+    invoice_item4 = InvoiceItem.create(item_id: item1.id, invoice_id: invoice4.id, quantity: 4, unit_price: 13.00)
 
     transaction = Transaction.create(invoice_id: invoice1, credit_card_number: "credit number1", credit_card_expiration_date: "01/02/2003", result: "success")
     transaction = Transaction.create(invoice_id: invoice2, credit_card_number: "credit number1", credit_card_expiration_date: "01/02/2003", result: "success")
@@ -31,7 +31,7 @@ describe "Merchants API" do
     get '/api/v1/merchants/most_revenue?quantity=2'
 
     json = JSON.parse(response.body, symbolize_names: true)
-
+    binding.pry
     expect(json[:data].length).to eq(2)
 
     expect(json[:data][0][:attributes][:name]).to eq(merchant3.name)

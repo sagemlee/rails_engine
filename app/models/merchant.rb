@@ -21,6 +21,7 @@ class Merchant < ApplicationRecord
 
     def self.most_revenue(info)    
         highest_revenue =  Merchant.select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS "revenue"').joins(invoices: [:invoice_items, :transactions]).where(transactions: {result: "success"}).group('merchants.id').order("revenue desc").limit(info[:quantity].to_i).to_a
+       binding.pry
         highest_revenue
     end 
 
@@ -30,7 +31,6 @@ class Merchant < ApplicationRecord
     end 
 
     def self.total_revenue(info)
-        binding.pry  
         revenue = Merchant.select('merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS "quantity"').joins(invoices: [:invoice_items, :transactions]).where(invoices: {created_at: info[:start].to_date.beginning_of_day..info[:end].to_date.end_of_day}).group('merchants.id').to_a
     
         total = revenue.sum {|merchant| merchant.quantity}
