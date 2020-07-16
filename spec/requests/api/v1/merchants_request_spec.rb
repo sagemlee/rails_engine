@@ -1,50 +1,48 @@
 require 'rails_helper'
 
-describe "Items API" do
+describe "Merchants API" do
   it "sends a list of items" do
-    create_list(:item, 3)
+    create_list(:merchant, 3)
 
-    get '/api/v1/items'
+    get '/api/v1/merchants'
 
     expect(response).to be_successful
 
-    items = JSON.parse(response.body, symbolize_names: true )
-   expect(items[:data].count).to eq(3)
+    merchants = JSON.parse(response.body, symbolize_names: true )
+   expect(merchants[:data].count).to eq(3)
 
   end
 
-  it "can get one item by its id" do
-    id = create(:item).id
+  it "can get one merchant by its id" do
+    id = create(:merchant).id
 
-    get "/api/v1/items/#{id}"
+    get "/api/v1/merchants/#{id}"
 
-    item = JSON.parse(response.body, symbolize_names: true )
+    merchant = JSON.parse(response.body, symbolize_names: true )
     expect(response).to be_successful
-    expect(item[:data][:attributes][:id]).to eq(id)
+    expect(merchant[:data][:attributes][:id]).to eq(id)
   end
 
-  it "can create a new item" do
-    merchant = create(:merchant)
-    item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
-    post "/api/v1/items", params: {item: item_params}
-    item = Item.last
+  it "can create a new merchant" do
+    merchant_params = { name: "Walmart"}
+    post "/api/v1/merchants", params: {merchant: merchant_params}
+    merchant = Merchant.last
     expect(response).to be_successful
-    expect(item.name).to eq(item_params[:name])
+    expect(merchant.name).to eq(merchant_params[:name])
   end
 
-  it "can delete item" do
-    merchant = create(:merchant)
-    item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
-
-    post "/api/v1/items", params: {item: item_params}
-    item = Item.last
+  it "can delete merchant" do
+    merchant_params = { name: "Walmart"}
+    post "/api/v1/merchants", params: {merchant: merchant_params}
+    
+    merchant = Merchant.last
     expect(response).to be_successful
-    expect(item.name).to eq(item_params[:name])
+    expect(merchant.name).to eq(merchant_params[:name])
 
-    delete "/api/v1/items/#{item.id}"
+    delete "/api/v1/merchants/#{merchant.id}"
 
     expect(response).to be_success
-    expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    expect{merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
 end

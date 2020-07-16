@@ -11,7 +11,7 @@ class Api::V1::ItemsController < ApplicationController
     end
 
     def create
-      hello = Item.create(item_params)
+      hello = Item.create(item: params)
        render json: ItemSerializer.new(hello)
     end
 
