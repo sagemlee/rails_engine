@@ -26,7 +26,7 @@ describe "Items API" do
   it "can create a new item" do
     merchant = create(:merchant)
     item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
-    post "/api/v1/items", params: {item: item_params}
+    post "/api/v1/items", params: item_params
     item = Item.last
     expect(response).to be_successful
     expect(item.name).to eq(item_params[:name])
@@ -36,7 +36,7 @@ describe "Items API" do
     merchant = create(:merchant)
     item_params = { name: "Toothbrush", description: "Dental health is important", unit_price: 123.45, merchant_id: merchant.id }
 
-    post "/api/v1/items", params: {item: item_params}
+    post "/api/v1/items", params: item_params
     item = Item.last
     expect(response).to be_successful
     expect(item.name).to eq(item_params[:name])
